@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html th:replace="layouts/masterLayout :: layout(~{::main})"
+      xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<main role="main">
+    <div class="container mt-5">
+        <div th:if="${success}" role="alert"
+             class="alert alert-success">
+            <p>Employee Successfully saved.</p>
+        </div>
+        <div th:if="${update}" role="alert"
+             class="alert alert-success">
+            <p>Employee Successfully updated.</p>
+        </div>
+        <div class="row">
+            <div class="col">
+
+                <a th:href="@{/employee-form}" class="btn btn-success
+                my-3">New Employee</a>
+                <div class="card shadow">
+                    <h3 class="card-header">Employees</h3>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>FirstName</th>
+                        <th>LastName</th>
+                        <th>Email</th>
+                        <th>DateOfBirth</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="emp : ${employees}">
+                        <td th:text="${emp.id}"></td>
+                        <td th:text="${emp.firstName}"></td>
+                        <td th:text="${emp.lastName}"></td>
+                        <td th:text="${emp.email}"></td>
+                        <td th:text="${emp.dateOfBirth}"></td>
+                        <td><a th:href="@{'/employee-delete?id='+ ${emp.id}}"
+                        class="btn btn-outline-danger">Delete</a></td>
+                        <td><a th:href="@{'/employee-update?id='+ ${emp.id}}"
+                               class="btn btn-outline-info"
+                        >Update</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>
